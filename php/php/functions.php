@@ -2,7 +2,7 @@
 	session_start();
 
 	// connect to database
-	$db = mysqli_connect('localhost:3307', 'root', 'admin', 'cifweb');
+	include'/php/connection/connection.php';
 
 	// variable declaration
 	$username = "";
