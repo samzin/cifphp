@@ -4,7 +4,7 @@
   // Toggle the side navigation
   $("#sidebarToggle").on('click', function(e) {
     e.preventDefault();
-    $("body").toggleClass("sidebar-toggled");
+    $("body").toggleClass("sidebar");
     $(".sidebar").toggleClass("toggled");
   });
 
