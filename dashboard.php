@@ -1,3 +1,11 @@
+<?php 
+	include('php/php/functions.php');
+
+	if (!isLoggedIn()) {
+		$_SESSION['msg'] = "You must log in first";
+		header('location: login.php');
+	}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>University CIF</title>
+  <title>University Dashboard</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -25,18 +33,21 @@
 <body id="page-top">
 
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+<a class="navbar-brand mr-1" href="index.php"><img src="images/logo.png" class="headederlogo" alt="Cinque Terre"></a>
+    
 
-    <a class="navbar-brand mr-1" href="index.html"><img src="images/logo.png" class="headederlogo" alt="Cinque Terre"></a>
-
+    <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+      <i class="fas fa-bars"></i>
+    </button>
    
-
+          <span> Savitribai Phule Pune University </span>
+        
     <!-- Navbar Search -->
     <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
       <div class="input-group">
         University of pune
       </div>
     </form>
-
     <!-- Navbar -->
     <ul class="navbar-nav ml-auto ml-md-0">
       <li class="nav-item dropdown no-arrow mx-1">
@@ -66,11 +77,16 @@
       <li class="nav-item dropdown no-arrow">
         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-user-circle fa-fw"></i>
+		  
         </a>
+		
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-          <a class="dropdown-item" href="#">Settings</a>
-          <a class="dropdown-item" href="#">Activity Log</a>
-          <div class="dropdown-divider"></div>
+          
+          <a class="dropdown-item" href="#"><?php  if (isset($_SESSION['user'])) : ?>
+				 <strong><?php echo $_SESSION['user']['username']; ?></strong><?php endif ?></a>
+          <div class="dropdown-divider">----</div>
+		  <a class="dropdown-item" href="#">Settings</a>
+		  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#myprofileModal">Profile</a>
           <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
         </div>
       </li>
@@ -89,7 +105,10 @@
         </a>
       </li>
       <li class="nav-item dropdown">
-       
+        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>Pages</span>
+        </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
           <h6 class="dropdown-header">Login Screens:</h6>
           <a class="dropdown-item" href="login.html">Login</a>
@@ -732,7 +751,55 @@
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
+          <a class="btn btn-primary" href="index.php">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <!-- Profile Modal-->
+  <div class="modal fade" id="myprofileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Profile </h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+			<form method="post" action="register.php">
+
+		<?php echo display_error(); ?>
+
+		<div class="input-group">
+			<label>Username</label>
+			<input type="text" name="username" value="<?php echo $username; ?>">
+		</div>
+		<div class="input-group">
+			<label>Email</label>
+			<input type="email" name="email" value="<?php echo $email; ?>">
+		</div>
+		<div class="input-group">
+			<label>Password</label>
+			<input type="password" name="password_1">
+		</div>
+		<div class="input-group">
+			<label>Confirm password</label>
+			<input type="password" name="password_2">
+		</div>
+		<div class="input-group">
+			<button type="submit" class="btn" name="register_btn">Register</button>
+		</div>
+		<p>
+			<!--Already a member? <a href="login.php">Sign in</a> -->
+		</p>
+	</form>
+		
+		</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="index.php">Submit</a>
         </div>
       </div>
     </div>

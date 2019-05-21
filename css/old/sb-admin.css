@@ -206,7 +206,7 @@ figure {
 img {
   vertical-align: middle;
   border-style: none;
-  width:120px;
+      width: 120px;
 }
 
 svg {
@@ -4762,11 +4762,8 @@ input[type="button"].btn-block {
 }
 
 .navbar-expand .navbar-nav .nav-link {
-border: 1px solid rgb(13, 10, 14);
-    /* border: 1px; */
-    background-color: #f7d866;
-    padding-right: 0.5rem;
-    padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
 }
 
 .navbar-expand > .container,
@@ -4844,7 +4841,7 @@ border: 1px solid rgb(13, 10, 14);
 }
 
 .navbar-dark .navbar-nav .nav-link {
-  color: black;
+    color: rgba(14, 14, 14, 0.5);
 }
 
 .navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link:focus {
@@ -4859,7 +4856,7 @@ border: 1px solid rgb(13, 10, 14);
 .navbar-dark .navbar-nav .active > .nav-link,
 .navbar-dark .navbar-nav .nav-link.show,
 .navbar-dark .navbar-nav .nav-link.active {
-  color: #fff;
+  color: #000;
 }
 
 .navbar-dark .navbar-toggler {
@@ -6831,8 +6828,8 @@ button.bg-light:focus {
 }
 
 .bg-dark {
-      background-color: white !important;
-    border-bottom: 5px solid rgb(50, 130, 187);
+  background-color: white !important;
+ border-bottom: 5px solid #3282bb;
 }
 
 a.bg-dark:hover, a.bg-dark:focus,
@@ -10195,7 +10192,7 @@ button.bg-dark:focus {
 }
 
 .text-white {
-  color: #1f4463 !important ;
+  color: #fff !important;
 }
 
 .text-primary {
@@ -10496,6 +10493,28 @@ body {
   min-height: calc(100vh - 56px);
 }
 
+	 /* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .sidebar {
+  width: 90px !important;
+  background-color: #212529;
+  min-height: calc(100vh - 56px);
+  display:none;
+}
+
+/*  small devices (phones, 600px and down) */
+@media only screen and (max-width: 992px)
+.sidebar {
+  width: 90px !important;
+  background-color: #212529;
+  min-height: calc(100vh - 56px);
+  display:none;
+}
+
+
+
+}
+
 .sidebar .nav-item:last-child {
   margin-bottom: 1rem;
 }
@@ -10727,7 +10746,7 @@ body.sidebar-toggled footer.sticky-footer {
     width: calc(100% - 90px);
   }
 }
-/*Etra Add css */
+ /*Etra Add css */
  .error {
 	width: 100%; 
 	margin: 5px auto; 
@@ -10738,3 +10757,9 @@ body.sidebar-toggled footer.sticky-footer {
 	border-radius: 5px; 
 	text-align: left;
 }
+
+
+
+
+
+

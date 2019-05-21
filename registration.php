@@ -1,3 +1,4 @@
+<?php include('php/php/functions.php') ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,50 +48,48 @@ University of pune
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">Register an Account</div>
       <div class="card-body">
-        <form>
+        <form method="post" action="registration.php">
+		<?php echo display_error(); ?>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">		
+		     <div class="input-group">
+			     <input type="text" name="username" class="form-control" placeholder="First name" value="<?php echo $username; ?>">
+		     </div>
+              </div>
+              <div class="col-md-6">
+			   <div class="input-group">
+			     <input type="text" name="lastName" class="form-control" placeholder="Last name" value="<?php echo $username; ?>">
+		     </div>
+                
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+			  <div class="input-group">
+			     <input type="email" name="email" class="form-control" placeholder="Email address" value="<?php echo $username; ?>">
+		     </div>
+          </div>
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
-                <div class="form-label-group">
-                  <input type="text" id="firstName" class="form-control" placeholder="First name" required="required" autofocus="autofocus">
-                  <label for="firstName">First name</label>
-                </div>
+				<div class="input-group">
+			     <input type="password" name="password_1" class="form-control" placeholder="Password" value="<?php echo $username; ?>">
+		     </div>
               </div>
               <div class="col-md-6">
-                <div class="form-label-group">
-                  <input type="text" id="lastName" class="form-control" placeholder="Last name" required="required">
-                  <label for="lastName">Last name</label>
-                </div>
+				<div class="input-group">
+			     <input type="password" name="password_2" class="form-control" placeholder="Confirm password" value="<?php echo $username; ?>">
+		     </div>
               </div>
             </div>
           </div>
-          <div class="form-group">
-            <div class="form-label-group">
-              <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="required">
-              <label for="inputEmail">Email address</label>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <div class="form-label-group">
-                  <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="required">
-                  <label for="inputPassword">Password</label>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-label-group">
-                  <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm password" required="required">
-                  <label for="confirmPassword">Confirm password</label>
-                </div>
-              </div>
-            </div>
-          </div>
-          <a class="btn btn-primary btn-block" href="login1.html">Register</a>
+		  <button type="submit" class="btn btn-primary btn-block" name="register_btn">Register</button>
+         
         </form>
         <div class="text-center">
-          <a class="d-block small mt-3" href="login1.html">Login Page</a>
-          <a class="d-block small" href="forgot-password1.html">Forgot Password?</a>
+          <a class="d-block small mt-3" href="index.php">Login Page</a>
+          <a class="d-block small" href="forgot-password.php">Forgot Password?</a>
         </div>
       </div>
     </div>
