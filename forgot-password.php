@@ -19,7 +19,7 @@
 
 </head>
 
-<body class="bg-dark">
+<body class="bg-dark1">
 
   <div class="container">
     <div class="card card-login mx-auto mt-5">
@@ -36,7 +36,7 @@
               <label for="inputEmail">Enter email address</label>
             </div>
           </div>
-          <a class="btn btn-primary btn-block" href="index.php">Reset Password</a>
+          <a class="btn btn-primary " href="index.php">Reset Password</a>
         </form>
         <div class="text-center">
           <a class="d-block small mt-3" href="registration.php">Register an Account</a>

@@ -2039,14 +2039,15 @@ pre code {
   border: 0;
 }
 
+
 .form-control:focus {
   color: #495057;
   background-color: #fff;
-  border-color: #80bdff;
+  border-color: #4ea0fc;
   outline: 0;
-  -webkit-box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+ 
 }
+
 
 .form-control::-webkit-input-placeholder {
   color: #6c757d;
@@ -10637,10 +10638,12 @@ body {
   max-width: 25rem;
 }
 
-.card-register {
-  max-width: 40rem;
+.card-register{
+  max-width: 30rem; 
 }
-
+.card-register1{
+  max-width: 73rem; 
+}
 .form-label-group {
   position: relative;
 }
@@ -10738,3 +10741,12 @@ body.sidebar-toggled footer.sticky-footer {
 	border-radius: 5px; 
 	text-align: left;
 }
+@media all and (max-width: 600px) and (orientation:landscape) 
+{
+    /* styles here */
+	.form-label-group {
+    margin-bottom: 1rem;
+    position: relative;
+}
+}
+

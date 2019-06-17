@@ -24,6 +24,11 @@
 		unset($_SESSION['user']);
 		header("location: ../login.php");
 	}
+    // Select User Type  
+    if (isset($_POST['user_type'])) {
+		user_type();
+	}
+
 
 	// REGISTER USER
 	function register(){
@@ -31,41 +36,85 @@
 
 		// receive all input values from the form
 		$username    =  e($_POST['username']);
-		$email       =  e($_POST['email']);
-		$password_1  =  e($_POST['password_1']);
-		$password_2  =  e($_POST['password_2']);
+		$email_1  =  e($_POST['email_1']);
+		$email_2  =  e($_POST['email_2']);
 
 		// form validation: ensure that the form is correctly filled
 		if (empty($username)) { 
 			array_push($errors, "Username is required"); 
 		}
-		if (empty($email)) { 
-			array_push($errors, "Email is required"); 
+		
+		if (empty($email_1)) { 
+			array_push($errors, "email is required"); 
 		}
-		if (empty($password_1)) { 
-			array_push($errors, "Password is required"); 
+		if (empty($email_2)) { 
+			array_push($errors, "confirm email is required"); 
 		}
-		if ($password_1 != $password_2) {
-			array_push($errors, "The two passwords do not match");
+		if ($email_1 != $email_2) {
+			array_push($errors, "The email do not match");
 		}
+		 $sql="SELECT email FROM users WHERE email='$email_1'";
+         $query = mysqli_query($db,$sql);
 
+         if (mysqli_num_rows($query) != 0){
+                array_push($errors,"Email already exists");
+        }
+
+  
 		// register user if there are no errors in the form
 		if (count($errors) == 0) {
 			
-		
-			$password = md5($password_1);//encrypt the password before saving in the database
-
+	
+            //A  function for generate password
+                function getMeRandomPwd($length){
+                   $a = str_split("abcdefghijklmnopqrstuvwxyABCDEFGHIJKLMNOPQRSTUVWXY0123456789"); 
+                        shuffle($a);
+                      return substr( implode($a), 0, $length );
+                     }
+                $password=getMeRandomPwd(8);
+			
+         
 			if (isset($_POST['user_type'])) {
 				
 				$user_type = e($_POST['user_type']);
 				$query = "INSERT INTO users (username, email, user_type, password) 
-						  VALUES('$username', '$email', '$user_type', '$password')";
+						  VALUES('$username', '$email_1', '$user_type', '$password')";
 				mysqli_query($db, $query);
 				$_SESSION['success']  = "New user successfully created!!";
 				header('location: home.php');
 			}else{
+				
+				//mail send functionalities
+			require 'php-mailer-master/php-mailer-master/PHPMailerAutoload.php';
+
+$mail = new PHPMailer;
+
+//$mail->SMTPDebug = 3;                               // Enable verbose debug output
+
+$mail->isSMTP();                                      // Set mailer to use SMTP
+$mail->Host = 'smtp.gmail.com;';  // Specify main and backup SMTP servers
+$mail->SMTPAuth = true;                               // Enable SMTP authentication
+$mail->Username = 'kanchanzinjade5555@gmail.com';                 // SMTP username
+$mail->Password = '9527036596';                           // SMTP password
+$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+$mail->Port = 587;                                    // TCP port to connect to
+
+$mail->setFrom('kanchanzinjade5555@gmail.com', 'Savitribai Phule Pune University');
+$mail->addAddress($email_1, 'CIF');     // Add a recipient
+
+$mail->isHTML(true);                                  // Set email format to HTML
+
+$mail->Subject = 'www.unipune.cif.com request password';
+$mail->Body    = "<p style='color:#080;font-size:20px;'>Your Password is:<b style='color:red;font-size:20px;'>$password</b></p>";
+
+if(!$mail->send()) {
+   array_push($errors, $mail->ErrorInfo);
+   
+} else {
+  
+
 				$query = "INSERT INTO users (username, email, user_type, password) 
-						  VALUES('$username', '$email', 'user', '$password')";
+						  VALUES('$username', '$email_1', 'user', '$password')";
 				mysqli_query($db, $query);
 
 				// get id of the created user
@@ -75,7 +124,7 @@
 				$_SESSION['success']  = "You are now logged in";
 				header('location: ./dashboard.php');				
 			}
-
+       }   
 		}
 
 	}
@@ -100,14 +149,14 @@
 		// make sure form is filled properly
 		if (empty($username)) {
 			
-			array_push($errors, "Username is required");
+			array_push($errors, "Email is required");
 		}
 		if (empty($password)) {
 			array_push($errors, "Password is required");
 		}
 		// attempt login if no errors on form
 		if (count($errors) == 0) {
-			$password = md5($password);  
+			  
 			$query = "SELECT * FROM users WHERE email='$username' AND password='$password' LIMIT 1";
 			$results = mysqli_query($db, $query);
 
@@ -167,5 +216,23 @@
 			echo '</div>';
 		}
 	}
+	
+	function user_type()
+	{    global $errors;
+		$type_of_user = e($_POST['type_of_user']);
+            
+		if (empty($type_of_user)) { 
+		  
+			array_push($errors, "Please Select type of user:"); 
+		}
+		else
+		{
+			header('location: SPPUCampus.php');
+		}
+		
+	}
+	
+	
+	
 
 ?>

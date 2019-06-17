@@ -25,23 +25,31 @@
 
 <body id="page-top">
 
-  <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+  <nav class="navbar navbar-expand navbar-dark  static-top">
 
     <a class="navbar-brand mr-1" href="index.html"><img src="images/logo.png" class="headederlogo" alt="Cinque Terre"></a>
 
    
 
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+	
+    <center><h1 style="font-size:5vw;">University of pune</h1></center>
+
     <!-- Navbar Search -->
     <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
       <div class="input-group">
-        
+       
       </div>
     </form>
-University of pune
+	
     <!-- Navbar -->
     <img src="images/unilogo.png" class="headederlogo" alt="Cinque Terre">
 
   </nav>
+
 
 
   <div class="container">
@@ -52,45 +60,34 @@ University of pune
 		<?php echo display_error(); ?>
           <div class="form-group">
             <div class="form-row">
-              <div class="col-md-6">		
-		     <div class="input-group">
-			     <input type="text" name="username" class="form-control" placeholder="First name" value="<?php echo $username; ?>">
+             <div class="input-group">
+			     <input type="text" name="username" class="form-control" placeholder="Full Name" value="<?php echo $username; ?>">
 		     </div>
-              </div>
-              <div class="col-md-6">
-			   <div class="input-group">
-			     <input type="text" name="lastName" class="form-control" placeholder="Last name" value="<?php echo $username; ?>">
-		     </div>
-                
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-			  <div class="input-group">
-			     <input type="email" name="email" class="form-control" placeholder="Email address" value="<?php echo $username; ?>">
-		     </div>
-          </div>
-          <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-				<div class="input-group">
-			     <input type="password" name="password_1" class="form-control" placeholder="Password" value="<?php echo $username; ?>">
-		     </div>
-              </div>
-              <div class="col-md-6">
-				<div class="input-group">
-			     <input type="password" name="password_2" class="form-control" placeholder="Confirm password" value="<?php echo $username; ?>">
-		     </div>
-              </div>
-            </div>
-          </div>
-		  <button type="submit" class="btn btn-primary btn-block" name="register_btn">Register</button>
          
+              </div>
+            </div>
+          
+          <div class="form-group">
+		  <div class="form-row">
+			  <div class="input-group">
+			     <input type="email" name="email_1" class="form-control" placeholder="Email" value="<?php echo $username; ?>">
+		     </div>
+          </div>
+		  </div>
+		  
+		   <div class="form-group">
+		  <div class="form-row">
+			  <div class="input-group">
+			     <input type="email" name="email_2" class="form-control" placeholder="Email Confirm" value="<?php echo $username; ?>">
+		     </div>
+          </div>
+		  </div> 
+		  <div class="text-center">
+		  <button type="submit" class="btn btn-primary " name="register_btn">Submit</button><br>
+          Already have an account?<a  href="index.php">Login here</a>
+		  </div>
         </form>
-        <div class="text-center">
-          <a class="d-block small mt-3" href="index.php">Login Page</a>
-          <a class="d-block small" href="forgot-password.php">Forgot Password?</a>
-        </div>
+       
       </div>
     </div>
   </div>

@@ -25,19 +25,25 @@
 
 <body id="page-top">
 
-  <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+  <nav class="navbar navbar-expand navbar-dark  static-top">
 
-    <a class="navbar-brand mr-1" href="index.html"><img src="images/logo.png" class="headederlogo" alt="Cinque Terre"></a>
+    <a class="navbar-brand mr-1" href="index.html">
+	<img src="images/logo.png" class="headederlogo" alt="Cinque Terre"></a>
 
-   
+	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+	
+     <h1 style="font-size:5vw;">University of pune</h1>
 
     <!-- Navbar Search -->
     <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
       <div class="input-group">
-        
+       
       </div>
     </form>
-University of pune
+	
     <!-- Navbar -->
     <img src="images/unilogo.png" class="headederlogo" alt="Cinque Terre">
 
@@ -60,21 +66,17 @@ University of pune
 			     <input type="Password" name="password" class="form-control" placeholder="Password" value="<?php echo $username; ?>">
 		     </div>
           </div>
-          <div class="form-group">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" value="remember-me">
-                Remember Password
-              </label>
-            </div>
-          </div>
-		  <button type="submit" class="btn btn-primary btn-block" name="login_btn">Login</button>
+		   <div class="text-center">
+		   <a class="d-block small" href="forgot-password.php">Forgot Password</a>
           
-        </form>
-        <div class="text-center">
-          <a class="d-block small mt-3" href="registration.php">Register an Account</a>
-          <a class="d-block small" href="forgot-password.php">Forgot Password?</a>
+		  <button type="submit" class="btn btn-primary" name="login_btn">Login</button><br>
+          Don't have an account<a  href="registration.php">  Create now</a>
+		     
         </div>
+        </form>
+       
+          
+      
       </div>
     </div>
   </div>
