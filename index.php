@@ -25,17 +25,34 @@
 
 <body id="page-top">
 
-  <nav class="navbar navbar-expand navbar-dark  static-top">
+  <nav class="navbar navbar-expand navbar-dark  static-top" style="box-shadow: 0 0 10px black;">
 
     <a class="navbar-brand mr-1" href="index.html">
-	<img src="images/logo.png" class="headederlogo" alt="Cinque Terre"></a>
+	<img src="images/logo.png" class="headederlogo img-thumbnail" alt="Cinque Terre"></a>
+     <style>
+	 @media only screen and (max-width: 768px) {
+  /* For mobile phones: */
 
-	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+.header {
+  color: #ffffff;
+  padding: 15px;
+}
+	 }
+	 </style>
 	
-     <h1 style="font-size:5vw;">University of pune</h1>
+     <h1 class="header" style="font-size: 14px;margin: 0 0 0px 0;
+   
+    font-family: Impact,sans-serif;
+    text-decoration: none;
+    font-weight: normal;
+    color: #4D6879;
+    text-shadow: 
+	
+	">Central Instrumentation Facility<br>
+Savitribai Phule Pune University<br>
+Pune - 411007.<br>
+Ph No.(020) 2560 1442
+Email:	cif@unipune.ac.in </h1>
 
     <!-- Navbar Search -->
     <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
@@ -45,7 +62,7 @@
     </form>
 	
     <!-- Navbar -->
-    <img src="images/unilogo.png" class="headederlogo" alt="Cinque Terre">
+    <img src="images/unilogo.png"  class="headederlogo img-thumbnail" alt="Cinque Terre">
 
   </nav>
 

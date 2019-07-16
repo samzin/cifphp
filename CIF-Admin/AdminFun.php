@@ -2,7 +2,7 @@
 	session_start();
 
 	// connect to database
-	include'/php/connection/connection.php';
+	include'connection.php';
 
 	// variable declaration
 	$username = "";

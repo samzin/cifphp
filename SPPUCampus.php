@@ -34,18 +34,36 @@
 
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 <a class="navbar-brand mr-1" href="index.php"><img src="images/logo.png" class="headederlogo" alt="Cinque Terre"></a>
-    
+     
+    <style>
+	 @media only screen and (max-width: 768px) {
+  /* For mobile phones: */
 
-    <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
-      <i class="fas fa-bars"></i>
-    </button>
+.header {
+  color: #ffffff;
+  padding: 15px;
+}
+	 }
+	 </style>
+	
+     <h1 class="header" style="font-size: 14px;margin: 0 0 0px 0;
    
-          <span>Savitribai Phule Pune University </span>
-        
+    font-family: Impact,sans-serif;
+    text-decoration: none;
+    font-weight: normal;
+    color: #4D6879;
+    text-shadow: 
+	
+	">Central Instrumentation Facility<br>
+Savitribai Phule Pune University<br>
+Pune - 411007.<br>
+Ph No.(020) 2560 1442
+Email:	cif@unipune.ac.in </h1>
+      
     <!-- Navbar Search -->
     <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
       <div class="input-group">
-        University of pune
+        <strong><?php echo $_SESSION['user']['username']; ?></strong>
       </div>
     </form>
     <!-- Navbar -->
@@ -99,38 +117,30 @@
     <!-- Sidebar -->
     <ul class="sidebar navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" >
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span>
         </a>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-fw fa-folder"></i>
-          <span>Pages</span>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-          <h6 class="dropdown-header">Login Screens:</h6>
-          <a class="dropdown-item" href="login.html">Login</a>
-          <a class="dropdown-item" href="register.html">Register</a>
-          <a class="dropdown-item" href="forgot-password.html">Forgot Password</a>
-          <div class="dropdown-divider"></div>
-          <h6 class="dropdown-header">Other Pages:</h6>
-          <a class="dropdown-item" href="404.html">404 Page</a>
-          <a class="dropdown-item" href="blank.html">Blank Page</a>
-        </div>
-      </li>
+      
       <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link"  >
           <i class="fas fa-fw fa-chart-area"></i>
-          <span>Charts</span></a>
+          <span>Analysis</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Tables</span></a>
+        <a class="nav-link" >
+          <i class="fa fa-user-circle" style="color:white;"></i>
+          <span>Account</span></a>
+      </li>
+	   <li class="nav-item">
+        <a href="#" class="nav-link" data-toggle="modal" data-target="#logoutModal">
+		<i class="fa fa-unlock" style="color:white;"></i>
+         
+          <span>Logout</span></a>
       </li>
     </ul>
+
 
     <div id="content-wrapper">
 
@@ -150,17 +160,18 @@
     <div class="card card-register1 mx-auto mt-12">
       <div class="card-header">SPPU Campus</div>
       <div class="card-body">
-        <form>
+         <form method="post" action="SPPUCampus.php">
+		 <?php echo display_error(); ?>
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
                 <div class="input-group">
-                  <input type="text" id="firstName" class="form-control" placeholder="Full Name" required="required" autofocus="autofocus"> 
+                  <input type="text" name="fullname" id="fullname" class="form-control" placeholder="Full Name" required="required" autofocus="autofocus"> 
                 </div>
               </div>
               <div class="col-md-6">			   
                 <div class="input-group">
-                  <input type="text" id="lastName" class="form-control" placeholder="Contact No." required="required">
+                  <input type="number" name="contact" id="contactno" class="form-control" placeholder="Contact No." required="required" onKeyPress="if(this.value.length==10) return false;"  maxlength="10" >
 				</div>
               </div>
             </div>
@@ -169,12 +180,12 @@
             <div class="form-row">
               <div class="col-md-6">
                 <div class="input-group">
-                  <input type="text" id="firstName1" class="form-control" placeholder="Name of Deparment" required="required" >                 
+                  <input type="text" name="dept_name" id="firstName1" class="form-control" placeholder="Name of Deparment" required="required" >                 
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="input-group">
-                  <input type="text" id="lastName1" class="form-control" placeholder="Contact No. of Guide" required="required"> 
+                  <input type="number" name="contact_guide" id="lastName1" class="form-control" placeholder="Contact No. of Guide" required="required" onKeyPress="if(this.value.length==10) return false;"  maxlength="10"> 
                 </div>
               </div>
             </div>
@@ -183,7 +194,7 @@
             <div class="form-row">
               <div class="col-md-6">
                 <div class="input-group">
-                  <input type="text" id="firstName1" class="form-control" placeholder="Guide Name" required="required" >
+                  <input type="text" name="guidename" id="firstName1" class="form-control" placeholder="Guide Name" required="required" >
                 </div>
               </div>
               <div class="col-md-6">
@@ -235,12 +246,12 @@
             <div class="form-row">
               <div class="col-md-6">
                 <div class="input-group">
-                  <input type="text" id="firstName1" class="form-control" placeholder="Guide Email Address" required="required" >  
+                  <input type="email" name="guideemail" id="firstName1" class="form-control" placeholder="Guide Email Address" required="required" >  
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="input-group">
-                  <input type="text" id="lastName1" class="form-control" placeholder="New Password " required="required">   
+                  <input type="password" name="newpassword" id="lastName1" class="form-control" placeholder="New Password " required="required">   
                 </div>
               </div>
             </div>
@@ -249,12 +260,12 @@
             <div class="form-row">
               <div class="col-md-6">
                 <div class="input-group">
-                  <input type="password" id="inputPassword" class="form-control" placeholder="Bill to be generated in the Name of" required="required">  
+                  <input type="text" name="Bill_genrate_name" id="inputPassword" class="form-control" placeholder="Bill to be generated in the Name of" required="required">  
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="input-group">
-                  <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm password" required="required">  
+                  <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" placeholder="Confirm password" required="required">  
                 </div>
               </div>
             </div>
@@ -262,7 +273,7 @@
 		  
 		  <div class="text-center">
          <button type="submit" class="btn btn-primary" name="register_btn">Cancel</button>
-		 <button type="submit" class="btn btn-primary" name="register_btn">Complete</button>
+		 <button type="submit" class="btn btn-primary" name="sppucampus_btn">Complete</button>
         </div>
 		  
 		 </form>
@@ -273,7 +284,7 @@
 
       </div>
       <!-- /.container-fluid -->
-
+<!-- livezilla.net PLACE SOMEWHERE IN BODY --><script type="text/javascript" id="lzdefsc" src="//localhost/University/6-7-19-CIF-version1.0/CIF-version1.0/Sourcecode/images/livezilla_server_8.0.1.0/livezilla/script.php?id=lzdefsc" defer></script><!-- livezilla.net PLACE SOMEWHERE IN BODY -->
       <!-- Sticky Footer -->
       <footer class="sticky-footer">
         <div class="container my-auto">
