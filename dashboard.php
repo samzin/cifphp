@@ -120,9 +120,9 @@ Email:	cif@unipune.ac.in </h1>
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="Add_Anlylis.php">
           <i class="fas fa-fw fa-chart-area"></i>
-          <span>Charts</span></a>
+          <span>Anylasis</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="tables.html">

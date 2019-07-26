@@ -1,15 +1,23 @@
-<?php include('php/php/functions.php') ?>
+<?php 
+	include('php/php/functions.php');
+
+	if (!isLoggedIn()) {
+		$_SESSION['msg'] = "You must log in first";
+		header('location: login.php');
+	}
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
- 
+
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin - Tables</title>
+  <title>University Dashboard</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -19,68 +27,70 @@
 
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
-
+  <script src="js/jquery.min.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/bootstrap.min.js"></script>
 </head>
 
 <body id="page-top">
 
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+<a class="navbar-brand mr-1" href="index.php"><img src="images/logo.png" class="headederlogo" alt="Cinque Terre"></a>
+     
+    <style>
+	 @media only screen and (max-width: 768px) {
+  /* For mobile phones: */
 
-    <a class="navbar-brand mr-1" href="index.html">Start Bootstrap</a>
+.header {
+  color: #ffffff;
+  padding: 15px;
+}
+	 }
+	 </style>
+	
+     <h1 class="header" style="font-size: 14px;margin: 0 0 0px 0;
+   
+    font-family: Impact,sans-serif;
+    text-decoration: none;
+    font-weight: normal;
+    color: #4D6879;
+    text-shadow: 
+	
+	">Central Instrumentation Facility<br>
+Savitribai Phule Pune University<br>
+Pune - 411007.<br>
+Ph No.(020) 2560 1442
+Email:	cif@unipune.ac.in </h1>
 
-    <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
-      <i class="fas fa-bars"></i>
-    </button>
-
+        
     <!-- Navbar Search -->
     <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
       <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-        <div class="input-group-append">
-          <button class="btn btn-primary" type="button">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
+        <strong><?php echo $_SESSION['user']['username']; ?></strong>
       </div>
     </form>
-
     <!-- Navbar -->
     <ul class="navbar-nav ml-auto ml-md-0">
-      <li class="nav-item dropdown no-arrow mx-1">
-        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-bell fa-fw"></i>
-          <span class="badge badge-danger">9+</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item dropdown no-arrow mx-1">
-        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-envelope fa-fw"></i>
-          <span class="badge badge-danger">7</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
+      
+    
       <li class="nav-item dropdown no-arrow">
         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-user-circle fa-fw"></i>
+		  
         </a>
+		
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-          <a class="dropdown-item" href="#">Settings</a>
-          <a class="dropdown-item" href="#">Activity Log</a>
-          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#"><?php  if (isset($_SESSION['user'])) : ?>
+				 <strong><?php echo $_SESSION['user']['username']; ?></strong><?php endif ?></a>
+          <div class="dropdown-divider">----</div>
+		  <a class="dropdown-item" href="#">Settings</a>
+		  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#myprofileModal">Edit Profile</a>
           <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
         </div>
       </li>
+	   <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+      <i class="fas fa-bars"></i>
+    </button>
     </ul>
 
   </nav>
@@ -134,7 +144,8 @@
           </li>
           <li class="breadcrumb-item active">Tables</li>
         </ol>
-
+ <form method="post" action="Add_Anlylisadd.php">
+		       <?php echo display_error(); ?>
         <!-- DataTables Example -->
         <div class="card mb-3">
           <div class="card-header">
@@ -146,206 +157,435 @@
               <div class="col-md-3">
               
 				<div class="table-responsive">
-              <table  width="100%" cellspacing="0">
-                 <tbody>
-				 <tr>
-                    <td>
-					<div class="form-group">
-					<div class="input_label user">
-                 <label>Analysis Type </label></div>
-			  <div class="input-group">
-		      <select name="type_of_user"  class="form-control"/>
-                <option value="">Select type of user</option>
-                 <?php 
-                     $s="select * from user_types";
-                        $q=mysqli_query($db,$s);
-                     while($rw=mysqli_fetch_array($q))
-                        { ?>
-                             <option value="<?php echo $rw['user_type']; ?>"><?php echo $rw['user_type']; ?></option>
-                          <?php } ?>
-                       </select>
-                       </div>
-                    </div>
-					</td>
-         
-                  </tr>
-				  <tr>
-                    <td>
-					<div class="form-group">
-					<div class="input_label user">
-                 <label>Sub Analysis Type</label></div>
-			  <div class="input-group">
-		      <select name="type_of_user"  class="form-control"/>
-                <option value="">Select type of user</option>
-                 <?php 
-                     $s="select * from user_types";
-                        $q=mysqli_query($db,$s);
-                     while($rw=mysqli_fetch_array($q))
-                        { ?>
-                             <option value="<?php echo $rw['user_type']; ?>"><?php echo $rw['user_type']; ?></option>
-                          <?php } ?>
-                       </select>
-                       </div>
-                    </div>
-					</td>
-         
-                  </tr>
-				  <tr>
-                    <td>
-					<div class="form-group">
-					<div class="input_label user">
-                 <label>Solvent Provided by</label></div>
-			  <div class="input-group">
-		      <select name="type_of_user"  class="form-control"/>
-                <option value="">Select type of user</option>
-                 <?php 
-                     $s="select * from user_types";
-                        $q=mysqli_query($db,$s);
-                     while($rw=mysqli_fetch_array($q))
-                        { ?>
-                             <option value="<?php echo $rw['user_type']; ?>"><?php echo $rw['user_type']; ?></option>
-                          <?php } ?>
-                       </select>
-                       </div>
-                    </div>
-					</td>
-         
-                  </tr>
-                  
-              
-                  <tr>
-                    <td>
-					<div class="form-group">
-					<div class="input_label user">
-                 <label>Select Solvent</label></div>
-			  <div class="input-group">
-		      <select name="type_of_user"  class="form-control"/>
-                <option value="">Select type of user</option>
-                 <?php 
-                     $s="select * from user_types";
-                        $q=mysqli_query($db,$s);
-                     while($rw=mysqli_fetch_array($q))
-                        { ?>
-                             <option value="<?php echo $rw['user_type']; ?>"><?php echo $rw['user_type']; ?></option>
-                          <?php } ?>
-                       </select>
-                       </div>
-                    </div>
-					</td>
-                    
-                  </tr>
-				   <tr>
-                    <td>
-					<div class="form-group">
-					<div class="input_label user">
-                 <label>No.of Samples</label></div>
-			  <div class="input-group">
-			     <input type="number" name="username" class="form-control" placeholder="No of Samples" value="<?php echo $username; ?>">
-		     </div>
-          </div>
-					</td>
-         
-                  </tr> 
-				  
-			  
+
+                  <table  width="100%" cellspacing="0">
+                    <tbody>
+				    <tr><td>
+			               <div class="form-group">
+                               <label>Select Analysis</label>
+			                     <div class="input-group">
+	                              <select class="form-control" name="country" id="country">
+	                               <option value="0">Select Analysis</option>	
+	                                <?php
+									 $countries=mysqli_query($db,"SELECT * FROM analysis");
+				                     while($country = mysqli_fetch_assoc($countries)){
+					                  echo "<option value='".$country['aid']."'>".$country['analysisname']."</option>";
+				                      }
+			                         ?>
+	                                 </select>
+                                     </div>
+                                       </div>
+					</td></tr>
+				    <tr> <td>
+					         <div class="form-group">
+					          <div class="input_label user">
+                                <label>Sub Analysis Type</label></div>
+			                     <div class="input-group">
+		                           <select class="form-control" name="region" id="region">
+	        	                   <option value="0">Select SubAnalysis</option>
+	                                </select>
+                                    </div>
+                             </div>
+					</td></tr>
+				  <tr><td>
+					       <div class="form-group">
+					          <div class="input_label user">
+                               <label>Select Solvent</label></div>
+			                      <div class="input-group">
+		                           <select class="form-control" name="city" id="city">
+	                                 <option value="0">Select solvent</option>
+	                                </select>
+                                 </div>
+                            </div>
+				  </td></tr>
+                  <tr><td>
+						<div class="form-group">
+						<div class="input_label user">
+							<label>Solvent provided by</label></div>
+							<div class="input-group">
+							<select class="form-control" name="city" id="city">
+								<option value="0">Select solvent</option>
+							</select>
+							</div>
+							</div>
+				 </td></tr>
+				 <tr><td>
+					   <div class="form-group">
+					     <div class="input_label user">
+					       <label>Rate of Samples </label></div>
+			                 <div class="input-group">
+			                   <input type="number" name="samplerate" class="form-control" id="samplerate" placeholder="Rate" value="<?php echo $username; ?>" readonly='readonly'>
+		                     </div>
+                         </div>
+                </td></tr> 
+				 <tr><td>
+					   <div class="form-group">
+					      <div class="input_label user">
+					         <label>No.of Samples </label></div>
+			                   <div class="input-group">
+			                       <input type="number" name="numberofsamples" class="form-control" placeholder="No of Samples" id="numberofsamples" value="">
+		                        </div>
+                             </div>
+                </td></tr> 
+			    <tr><td>
+					 <div class="form-group">
+					     <div class="input_label user">
+					       <label>Total Amount</label></div>
+			                 <div class="input-group">
+			                   <input type="number" name="sum" id="sum" class="form-control" placeholder="Total Amount" value="" readonly='readonly'>
+		                   </div>
+                        </div>
+                 </td></tr> 
 				  </td></tr>
                 </tbody>
               </table>
             </div>
               </div>
-			  
+	
+			   <script>		   
+	$().ready(function() {
+    $( "#country" ).change(function() {
+      var region = $( "#country" ).val();
+         $.ajax({ url: "SearchCity.php",
+         data: {region_id: region},
+         type: 'get',
+         async: false,
+         success:
+         function(msg) {
+			
+         	$('#city').find('option').remove().end();
+         	var city = jQuery.parseJSON(msg);
+			
+         	for(var i = 0 ; i < city.length ; i++)
+         	{  
+         		$('#city').append('<option value="'+city[i].solid+'">'+city[i].solventname+'</option>');
+         	}
+       	 }
+        });
+		
+       var country = $( "#country" ).val();
+    	$("#country option[value='0']").remove();        
+       	$.ajax({ url: "SearchRegion.php",
+         data: {country_id: country},
+         type: 'get',
+         async: false,
+         success:
+         function(msg) {
+			 //document.write(msg)
+			 
+         	$('#region').find('option').remove().end();
+			$('#region').append('<option value="0">Select SubAnalysis</option>');
+         	var region = jQuery.parseJSON(msg);
+         	for(var i = 0 ; i < region.length ; i++)
+         	{   // document.write(region[id])
+         		$('#region').append('<option value="'+region[i].Aid+'">'+region[i].subanalysis+'</option>');
+         	}
+       	 }
+        });
+		
+		
+		
+		
+		
+	});
+	
+	// rate   ----------------------------
+	
+	$( "#region" ).change(function() {
+    	var region = $( "#region" ).val();
+		var userid='<?php echo $_SESSION['user']['user_type'];?>';  
+         $.ajax({ url: "Searchrate.php",
+         data: {region_id: region ,user:userid},
+         type: 'get',
+         async: false,
+         success:
+         function(msg1) {
+			
+         	$('#city').find('option').remove().end();
+         	var city1 = jQuery.parseJSON(msg1);
+			
+         	for(var i = 0 ; i < city1.length ; i++)
+         	{    var rate=city1[i].rate;
+		         
+				 document.getElementById("samplerate").value = rate;
+		         //alert("Usertype=" +userid+ "Rate="+rate );
+         		//$('#city').append('<option value="'+city[i].id+'">'+city[i].city+'</option>');
+         	}
+       	 }
+        });
+	});
+
+	//------------------------------------------------	
+});  
+	</script>
+	
+	<!-- total sum finllay-->
+	
+	  <script>
+	  $(function(){
+            $('#samplerate, #numberofsamples').keyup(function(){
+               var samplerate = parseFloat($('#samplerate').val()) || 0;
+               var numberofsamples = parseFloat($('#numberofsamples').val()) || 0;
+               $('#sum').val(samplerate*numberofsamples);
+            });
+         });
+	  </script>
              <div class="col-md-9">
-               
-	  
-	  
-    <div class="card card-register2 md-12">
+   <div class="card card-register2 md-12">
       <div class="card-header">Register an Account</div>
       <div class="card-body">
-        <form>
           <div class="form-group">
             <div class="form-row">
-			
-              <div class="col-md-4">
-			 
-               <div class="form-group">
-			 
-          </div>
-              </div>
-			    <div class="col-md-4">
-               <div class="form-group">
-			  <div class="input-group">
-			     <input type="text" name="username" class="form-control" placeholder="No of Samples" value="<?php echo $username; ?>">
-		     </div>
-          </div>
-              </div>
+            
+			    
              
             </div>
 			<div class="form-row">
               <div class="col-md-4">
-                <div class="form-label-group">
-                  <input type="text" id="firstName" class="form-control" placeholder="First name" required="required" autofocus="autofocus">
-                  <label for="firstName">First name</label>
+                <div class="form-group">
+			      <div class="input-group">
+			        <input type="text" name="sample1" class="form-control" placeholder="sample1" value="">
+		           </div>
                 </div>
               </div>
-			     <div class="col-md-4">
-                <div class="form-label-group">
-                  <input type="text" id="firstName" class="form-control" placeholder="First name" required="required" autofocus="autofocus">
-                  <label for="firstName">First name</label>
+			    <div class="col-md-4">
+                <div class="form-group">
+			      <div class="input-group">
+			        <input type="text" name="sample2" class="form-control" placeholder="sample1" value="">
+		           </div>
                 </div>
               </div>
-              <div class="col-md-4">
-                <div class="form-label-group">
-                  <input type="text" id="lastName" class="form-control" placeholder="Last name" required="required">
-                  <label for="lastName">Last name</label>
+			    <div class="col-md-4">
+                <div class="form-group">
+			      <div class="input-group">
+			        <input type="text" name="sample3" class="form-control" placeholder="sample1" value="">
+		           </div>
                 </div>
               </div>
-            </div>
-			<div class="form-row">
-              <div class="col-md-4">
-                <div class="form-label-group">
-                  <input type="text" id="firstName" class="form-control" placeholder="First name" required="required" autofocus="autofocus">
-                  <label for="firstName">First name</label>
+			    <div class="col-md-4">
+                <div class="form-group">
+			      <div class="input-group">
+			        <input type="text" name="sample4" class="form-control" placeholder="sample1" value="">
+		           </div>
                 </div>
               </div>
-			     <div class="col-md-4">
-                <div class="form-label-group">
-                  <input type="text" id="firstName" class="form-control" placeholder="First name" required="required" autofocus="autofocus">
-                  <label for="firstName">First name</label>
+			    <div class="col-md-4">
+                <div class="form-group">
+			      <div class="input-group">
+			        <input type="text" name="sample5" class="form-control" placeholder="sample1" value="">
+		           </div>
                 </div>
               </div>
-              <div class="col-md-4">
-                <div class="form-label-group">
-                  <input type="text" id="lastName" class="form-control" placeholder="Last name" required="required">
-                  <label for="lastName">Last name</label>
+			    <div class="col-md-4">
+                <div class="form-group">
+			      <div class="input-group">
+			        <input type="text" name="sample6" class="form-control" placeholder="sample1" value="">
+		           </div>
                 </div>
               </div>
-            </div>
-			<div class="form-row">
-              <div class="col-md-4">
-                <div class="form-label-group">
-                  <input type="text" id="firstName" class="form-control" placeholder="First name" required="required" autofocus="autofocus">
-                  <label for="firstName">First name</label>
+			    <div class="col-md-4">
+                <div class="form-group">
+			      <div class="input-group">
+			        <input type="text" name="sample7" class="form-control" placeholder="sample1" value="">
+		           </div>
                 </div>
               </div>
-			     <div class="col-md-4">
-                <div class="form-label-group">
-                  <input type="text" id="firstName" class="form-control" placeholder="First name" required="required" autofocus="autofocus">
-                  <label for="firstName">First name</label>
+			  <div class="col-md-4">
+                <div class="form-group">
+			      <div class="input-group">
+			        <input type="text" name="sample8" class="form-control" placeholder="sample1" value="">
+		           </div>
                 </div>
               </div>
-              <div class="col-md-4">
-                <div class="form-label-group">
-                  <input type="text" id="lastName" class="form-control" placeholder="Last name" required="required">
-                  <label for="lastName">Last name</label>
+			  
+			    <div class="col-md-4">
+                <div class="form-group">
+			      <div class="input-group">
+			        <input type="text" name="sample9" class="form-control" placeholder="sample1" value="">
+		           </div>
                 </div>
               </div>
+			   <div class="col-md-4">
+                <div class="form-group">
+			      <div class="input-group">
+			        <input type="text" name="sample10" class="form-control" placeholder="sample1" value="">
+		           </div>
+                </div>
+              </div>
+			   <div class="col-md-4">
+                <div class="form-group">
+			      <div class="input-group">
+			        <input type="text" name="sample11" class="form-control" placeholder="sample1" value="">
+		           </div>
+                </div>
+              </div>
+			   <div class="col-md-4">
+                <div class="form-group">
+			      <div class="input-group">
+			        <input type="text" name="sample12" class="form-control" placeholder="sample1" value="">
+		           </div>
+                </div>
+              </div>
+			   <div class="col-md-4">
+                <div class="form-group">
+			      <div class="input-group">
+			        <input type="text" name="sample13" class="form-control" placeholder="sample1" value="">
+		           </div>
+                </div>
+              </div>
+			  
+			    <div class="col-md-4">
+                <div class="form-group">
+			      <div class="input-group">
+			        <input type="text" name="sample14" class="form-control" placeholder="sample1" value="">
+		           </div>
+                </div>
+              </div>
+			    <div class="col-md-4">
+                <div class="form-group">
+			      <div class="input-group">
+			        <input type="text" name="sample15" class="form-control" placeholder="sample1" value="">
+		           </div>
+                </div>
+              </div>
+			    <div class="col-md-4">
+                <div class="form-group">
+			      <div class="input-group">
+			        <input type="text" name="sample16" class="form-control" placeholder="sample1" value="">
+		           </div>
+                </div>
+              </div>
+			    <div class="col-md-4">
+                <div class="form-group">
+			      <div class="input-group">
+			        <input type="text" name="sample17" class="form-control" placeholder="sample1" value="">
+		           </div>
+                </div>
+              </div>
+			  <div class="col-md-4">
+                <div class="form-group">
+			      <div class="input-group">
+			        <input type="text" name="sample18" class="form-control" placeholder="sample1" value="">
+		           </div>
+                </div>
+              </div>
+			  
+			    <div class="col-md-4">
+                <div class="form-group">
+			      <div class="input-group">
+			        <input type="text" name="sample19" class="form-control" placeholder="sample1" value="">
+		           </div>
+                </div>
+              </div>
+			   <div class="col-md-4">
+                <div class="form-group">
+			      <div class="input-group">
+			        <input type="text" name="sample20" class="form-control" placeholder="sample1" value="">
+		           </div>
+                </div>
+              </div>
+			   <div class="col-md-4">
+                <div class="form-group">
+			      <div class="input-group">
+			        <input type="text" name="sample21" class="form-control" placeholder="sample1" value="">
+		           </div>
+                </div>
+              </div>
+			   <div class="col-md-4">
+                <div class="form-group">
+			      <div class="input-group">
+			        <input type="text" name="sample22" class="form-control" placeholder="sample1" value="">
+		           </div>
+                </div>
+              </div>
+			   <div class="col-md-4">
+                <div class="form-group">
+			      <div class="input-group">
+			        <input type="text" name="sample23" class="form-control" placeholder="sample1" value="">
+		           </div>
+                </div>
+              </div>
+			    <div class="col-md-4">
+                <div class="form-group">
+			      <div class="input-group">
+			        <input type="text" name="sample24" class="form-control" placeholder="sample1" value="">
+		           </div>
+                </div>
+              </div>
+			    <div class="col-md-4">
+                <div class="form-group">
+			      <div class="input-group">
+			        <input type="text" name="sample25" class="form-control" placeholder="sample1" value="">
+		           </div>
+                </div>
+              </div>
+			    <div class="col-md-4">
+                <div class="form-group">
+			      <div class="input-group">
+			        <input type="text" name="sample26" class="form-control" placeholder="sample1" value="">
+		           </div>
+                </div>
+              </div>
+			    <div class="col-md-4">
+                <div class="form-group">
+			      <div class="input-group">
+			        <input type="text" name="sample27" class="form-control" placeholder="sample1" value="">
+		           </div>
+                </div>
+              </div>
+			    <div class="col-md-4">
+                <div class="form-group">
+			      <div class="input-group">
+			        <input type="text" name="sample28" class="form-control" placeholder="sample1" value="">
+		           </div>
+                </div>
+              </div>
+			    <div class="col-md-4">
+                <div class="form-group">
+			      <div class="input-group">
+			        <input type="text" name="sample29" class="form-control" placeholder="sample1" value="">
+		           </div>
+                </div>
+              </div>
+			   <div class="col-md-4">
+                <div class="form-group">
+			      <div class="input-group">
+					<input type="text" name="sample30" class="form-control" placeholder="sample1" value="">
+		           </div>
+                </div>
+              </div>
+			  
+			    <div class="col-md-4">
+                <div class="form-group">
+			      <div class="input-group">
+			       <button type="submit" class="btn btn-primary " name="cancel_btn">Cancel</button>
+		            </div>
+                </div>
+              </div>
+			    <div class="col-md-4">
+                <div class="form-group">
+			      <div class="input-group">
+			        <button type="submit" class="btn btn-primary " name="save_btn">Submit</button>
+					</div>
+                </div>
+              </div>
+			   <div class="col-md-4">
+                <div class="form-group">
+			      <div class="input-group">
+			         <button type="submit" class="btn btn-primary " name="save_btn">Submit</button> </div>
+                </div>
+              </div>
+			
+
+			  
+
             </div>
           </div>
          
           
    
     
- </div></div></div></div></div></div></div>
+ </div></div></div></div></div></div></form></div>
 
       <!-- /.container-fluid -->
 
