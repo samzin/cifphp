@@ -1,6 +1,6 @@
 <?php 
 	include('php/php/functions.php');
-
+    include('php/php/Anyalisis_add.php');
 	if (!isLoggedIn()) {
 		$_SESSION['msg'] = "You must log in first";
 		header('location: login.php');
@@ -24,7 +24,8 @@
 
   <!-- Page level plugin CSS-->
   <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
   <script src="js/jquery.min.js"></script>
@@ -105,6 +106,11 @@ Email:	cif@unipune.ac.in </h1>
           <span>Dashboard</span>
         </a>
       </li>
+	  <li class="nav-item">
+        <a class="nav-link" href="Analysis_Reports.php">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Anylasis Order</span></a>
+      </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-fw fa-folder"></i>
@@ -144,8 +150,8 @@ Email:	cif@unipune.ac.in </h1>
           </li>
           <li class="breadcrumb-item active">Tables</li>
         </ol>
- <form method="post" action="Add_Anlylisadd.php">
-		       <?php echo display_error(); ?>
+ <form method="post" action="Add_Anlylis.php">
+		<?php echo display_analysis_error();?>
         <!-- DataTables Example -->
         <div class="card mb-3">
           <div class="card-header">
@@ -162,8 +168,36 @@ Email:	cif@unipune.ac.in </h1>
                     <tbody>
 				    <tr><td>
 			               <div class="form-group">
-                               <label>Select Analysis</label>
+						     <style>
+.tooltip1 {
+     position: relative;
+    display: inline-block;
+ }
+
+.tooltip1 .tooltiptext1 {
+    visibility: hidden;
+    width:120px;
+    background-color:#528ffe;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 15px 0px 0px 0px;
+	font-family: consolas,monospace;
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltip1:hover .tooltiptext1 {
+    visibility: visible;
+}
+</style>
+
+
+                           <label>Select Analysis <div class="tooltip1"><i class="fa fa-question-circle" aria-hidden="true" style="color:red"></i>
+  <span class="tooltiptext1">Tooltip text </span>
+</div> </label>
 			                     <div class="input-group">
+								 
 	                              <select class="form-control" name="country" id="country">
 	                               <option value="0">Select Analysis</option>	
 	                                <?php
@@ -179,7 +213,9 @@ Email:	cif@unipune.ac.in </h1>
 				    <tr> <td>
 					         <div class="form-group">
 					          <div class="input_label user">
-                                <label>Sub Analysis Type</label></div>
+                                <label>Sub Analysis Type  <div class="tooltip1"><i class="fa fa-question-circle" aria-hidden="true" style="color:red"> </i>
+  <span class="tooltiptext1">Tooltip text</span>
+</div></label></div>
 			                     <div class="input-group">
 		                           <select class="form-control" name="region" id="region">
 	        	                   <option value="0">Select SubAnalysis</option>
@@ -190,7 +226,9 @@ Email:	cif@unipune.ac.in </h1>
 				  <tr><td>
 					       <div class="form-group">
 					          <div class="input_label user">
-                               <label>Select Solvent</label></div>
+                               <label>Select Solvent <div class="tooltip1"><i class="fa fa-question-circle" aria-hidden="true" style="color:red"> </i>
+  <span class="tooltiptext1">Tooltip text</span>
+</div></label></div>
 			                      <div class="input-group">
 		                           <select class="form-control" name="city" id="city">
 	                                 <option value="0">Select solvent</option>
@@ -201,7 +239,7 @@ Email:	cif@unipune.ac.in </h1>
                   <tr><td>
 						<div class="form-group">
 						<div class="input_label user">
-							<label>Solvent provided by</label></div>
+							<label>Solvent provided by </label></div>
 							<div class="input-group">
 							<select class="form-control" name="city" id="city">
 								<option value="0">Select solvent</option>
@@ -212,7 +250,9 @@ Email:	cif@unipune.ac.in </h1>
 				 <tr><td>
 					   <div class="form-group">
 					     <div class="input_label user">
-					       <label>Rate of Samples </label></div>
+					       <label>Rate of Samples <div class="tooltip1"><i class="fa fa-question-circle" aria-hidden="true" style="color:red"></i>
+  <span class="tooltiptext1">Tooltip text </span>
+</div></label></div>
 			                 <div class="input-group">
 			                   <input type="number" name="samplerate" class="form-control" id="samplerate" placeholder="Rate" value="<?php echo $username; ?>" readonly='readonly'>
 		                     </div>
@@ -221,7 +261,9 @@ Email:	cif@unipune.ac.in </h1>
 				 <tr><td>
 					   <div class="form-group">
 					      <div class="input_label user">
-					         <label>No.of Samples </label></div>
+					         <label>No.of Samples <div class="tooltip1"><i class="fa fa-question-circle" aria-hidden="true" style="color:red"></i>
+  <span class="tooltiptext1">Tooltip text </span>
+</div></label></div>
 			                   <div class="input-group">
 			                       <input type="number" name="numberofsamples" class="form-control" placeholder="No of Samples" id="numberofsamples" value="">
 		                        </div>
@@ -230,7 +272,9 @@ Email:	cif@unipune.ac.in </h1>
 			    <tr><td>
 					 <div class="form-group">
 					     <div class="input_label user">
-					       <label>Total Amount</label></div>
+					       <label>Total Amount <div class="tooltip1"><i class="fa fa-question-circle" aria-hidden="true" style="color:red"></i>
+  <span class="tooltiptext1">Tooltip text</span>
+</div></label></div>
 			                 <div class="input-group">
 			                   <input type="number" name="sum" id="sum" class="form-control" placeholder="Total Amount" value="" readonly='readonly'>
 		                   </div>
@@ -255,9 +299,12 @@ Email:	cif@unipune.ac.in </h1>
 			
          	$('#city').find('option').remove().end();
          	var city = jQuery.parseJSON(msg);
-			
+			 if(region==1)
+			 {
+		       $('#city').append('<option value="0">Select Solvent</option>');
+		     }
          	for(var i = 0 ; i < city.length ; i++)
-         	{  
+         	{   
          		$('#city').append('<option value="'+city[i].solid+'">'+city[i].solventname+'</option>');
          	}
        	 }
@@ -301,10 +348,10 @@ Email:	cif@unipune.ac.in </h1>
          success:
          function(msg1) {
 			
-         	$('#city').find('option').remove().end();
+         	//$('#city').find('option').remove().end();
          	var city1 = jQuery.parseJSON(msg1);
 			
-         	for(var i = 0 ; i < city1.length ; i++)
+         	for(var i = 0; i < city1.length ; i++)
          	{    var rate=city1[i].rate;
 		         
 				 document.getElementById("samplerate").value = rate;
@@ -314,7 +361,7 @@ Email:	cif@unipune.ac.in </h1>
        	 }
         });
 	});
-
+ 
 	//------------------------------------------------	
 });  
 	</script>
@@ -323,7 +370,38 @@ Email:	cif@unipune.ac.in </h1>
 	
 	  <script>
 	  $(function(){
-            $('#samplerate, #numberofsamples').keyup(function(){
+				$( "#city" ).change(function() {
+				var city = $( "#city" ).val();
+			   
+				   $.ajax({ url: "Solventrate.php",
+         data: {Solventrate_id: city },
+         type: 'get',
+         async: false,
+         success:
+         function(msg11) {
+		
+         	var city11 = jQuery.parseJSON(msg11);
+				for(var j = 0; j < city11.length ; j++)
+         	{    var solvent_rate=city11[j].rate;
+		        
+				// document.getElementById("samplerate").value = rate;
+		        
+         	
+			
+			 $('#samplerate, #numberofsamples').keyup(function(){	
+			   
+			    alert(solvent_rate);
+               var samplerate = parseFloat($('#samplerate').val()) || 0;
+               var numberofsamples = parseFloat($('#numberofsamples').val()) || 0;
+               $('#sum').val( (samplerate*numberofsamples)+(solvent_rate*numberofsamples));
+            });
+			}
+		 }
+				   });
+				
+				                               });
+				
+            $('#samplerate, #numberofsamples').keyup(function(){	
                var samplerate = parseFloat($('#samplerate').val()) || 0;
                var numberofsamples = parseFloat($('#numberofsamples').val()) || 0;
                $('#sum').val(samplerate*numberofsamples);
@@ -351,49 +429,49 @@ Email:	cif@unipune.ac.in </h1>
 			    <div class="col-md-4">
                 <div class="form-group">
 			      <div class="input-group">
-			        <input type="text" name="sample2" class="form-control" placeholder="sample1" value="">
+			        <input type="text" name="sample2" class="form-control" placeholder="sample2" value="">
 		           </div>
                 </div>
               </div>
 			    <div class="col-md-4">
                 <div class="form-group">
 			      <div class="input-group">
-			        <input type="text" name="sample3" class="form-control" placeholder="sample1" value="">
+			        <input type="text" name="sample3" class="form-control" placeholder="sample3" value="">
 		           </div>
                 </div>
               </div>
 			    <div class="col-md-4">
                 <div class="form-group">
 			      <div class="input-group">
-			        <input type="text" name="sample4" class="form-control" placeholder="sample1" value="">
+			        <input type="text" name="sample4" class="form-control" placeholder="sample4" value="">
 		           </div>
                 </div>
               </div>
 			    <div class="col-md-4">
                 <div class="form-group">
 			      <div class="input-group">
-			        <input type="text" name="sample5" class="form-control" placeholder="sample1" value="">
+			        <input type="text" name="sample5" class="form-control" placeholder="sample5" value="">
 		           </div>
                 </div>
               </div>
 			    <div class="col-md-4">
                 <div class="form-group">
 			      <div class="input-group">
-			        <input type="text" name="sample6" class="form-control" placeholder="sample1" value="">
+			        <input type="text" name="sample6" class="form-control" placeholder="sample6" value="">
 		           </div>
                 </div>
               </div>
 			    <div class="col-md-4">
                 <div class="form-group">
 			      <div class="input-group">
-			        <input type="text" name="sample7" class="form-control" placeholder="sample1" value="">
+			        <input type="text" name="sample7" class="form-control" placeholder="sample7" value="">
 		           </div>
                 </div>
               </div>
 			  <div class="col-md-4">
                 <div class="form-group">
 			      <div class="input-group">
-			        <input type="text" name="sample8" class="form-control" placeholder="sample1" value="">
+			        <input type="text" name="sample8" class="form-control" placeholder="sample8" value="">
 		           </div>
                 </div>
               </div>
@@ -401,28 +479,28 @@ Email:	cif@unipune.ac.in </h1>
 			    <div class="col-md-4">
                 <div class="form-group">
 			      <div class="input-group">
-			        <input type="text" name="sample9" class="form-control" placeholder="sample1" value="">
+			        <input type="text" name="sample9" class="form-control" placeholder="sample9" value="">
 		           </div>
                 </div>
               </div>
 			   <div class="col-md-4">
                 <div class="form-group">
 			      <div class="input-group">
-			        <input type="text" name="sample10" class="form-control" placeholder="sample1" value="">
+			        <input type="text" name="sample10" class="form-control" placeholder="sample10" value="">
 		           </div>
                 </div>
               </div>
 			   <div class="col-md-4">
                 <div class="form-group">
 			      <div class="input-group">
-			        <input type="text" name="sample11" class="form-control" placeholder="sample1" value="">
+			        <input type="text" name="sample11" class="form-control" placeholder="sample11" value="">
 		           </div>
                 </div>
               </div>
 			   <div class="col-md-4">
                 <div class="form-group">
 			      <div class="input-group">
-			        <input type="text" name="sample12" class="form-control" placeholder="sample1" value="">
+			        <input type="text" name="sample12" class="form-control" placeholder="sample12" value="">
 		           </div>
                 </div>
               </div>
@@ -565,7 +643,7 @@ Email:	cif@unipune.ac.in </h1>
 			    <div class="col-md-4">
                 <div class="form-group">
 			      <div class="input-group">
-			        <button type="submit" class="btn btn-primary " name="save_btn">Submit</button>
+			        <button type="submit" class="btn btn-primary " name="conform_btn">Submit</button>
 					</div>
                 </div>
               </div>

@@ -1,6 +1,6 @@
 <?php 
 	include('php/php/functions.php');
-
+    include('php/php/Anyalisis_add.php');
 	if (!isLoggedIn()) {
 		$_SESSION['msg'] = "You must log in first";
 		//header('location: login.php');
@@ -10,6 +10,7 @@
 
 	// connect to database
 	include'/php/connection/connection.php';
+	$errors   = array(); 
 $Analysis=$_POST['country'];
 $SubAnalysis=$_POST['region'];
 $Solvent=$_POST['city'];
@@ -31,6 +32,20 @@ for($i=1;$i<=$numberofsamples;$i++)
 	}
 }
 echo$sample;
+function display_error() {
+		global $errors;
+
+		if (count($errors) > 0){
+			echo '<div class="error">';
+				foreach ($errors as $error){
+					echo $error .'<br>';
+				}
+			echo '</div>';
+		}
+	}
+if (empty($Analysis)) { 
+			array_push($errors, "Select Aanalysis is required"); 
+		}
 $uid=$_SESSION['user']['id']; 
 $query = "INSERT INTO taborder (uid,sample_code,order_date,created_at ) 
 						  VALUES($uid,'$sample','$order_date','$createddate')";
